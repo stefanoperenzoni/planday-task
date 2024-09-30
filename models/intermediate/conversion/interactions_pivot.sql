@@ -6,13 +6,10 @@
 }}
 
 WITH latest_data AS (
+        SELECT *
+        FROM {{ source('planday', 'interactions') }}
     {% if is_incremental() %}
-        SELECT *
-        FROM {{ source('planday', 'interactions') }}
         WHERE "TIMESTAMP" > (SELECT MAX(max_timestamp) FROM {{ this }})
-    {% else %}
-        SELECT *
-        FROM {{ source('planday', 'interactions') }}
     {% endif %}
 ),
 
