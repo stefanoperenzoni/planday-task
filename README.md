@@ -224,6 +224,10 @@ I tried defining a unit test for the `interactions_pivot` model in `/models/unit
 In addition to that, we could add two more unit tests for the `trial_goals` and `trial_activation` models.
 As said, since these unit tests work on seed static data, they allow us to test edge cases of the models' logic
 
+A little fun fact about that: if you try `dbt test` you'll notice that the unittest fail with the error `column "ORGANIZATION_ID" does not exist`.
+After debugging for quite some time, I realised that unittests fixtures lower all the column names. So `ORGANIZATION_ID` became `organization_id`.
+Very particular behaviour that I did not expect. Perhaps solvable playing with the column quoting values?
+
 ## Possible Improvements
 
 The possible improvements of this dbt project lie in two categories.
