@@ -189,6 +189,12 @@ More insights and plots can be found in the aforementioned notebook
 
 Regarding testing, I would leverage the multiple tools dbt offer for testing.
 
+First of, a simple but effective way to ensure data quality is by using and enforcing constraints.
+I have not done it here in this task but we can easily add constraints such as primary_key or other checks.
+Ensuring contract for our models with specific constaints would definitely be the first step I'd take to ensure data quality.
+
+Moreover, we can leverage dbt testing:
+
 #### Generic Data Testing
 
 Besides those already provided by dbt, which can all be used in our models, we can define some more tests to check the values in the models we built.
@@ -229,4 +235,4 @@ As explained before, I think it would be important having a view over the timeli
 #### Better Testing
 
 Testing is never enough. Here I added some different types of tests. However, we could add more generic testing as well as more unit testing for the two marts' logic.
-
+Also, I'd add more constraints and enforce them on the models.
