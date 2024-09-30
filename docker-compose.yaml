@@ -1,0 +1,14 @@
+# Development services.
+version: "3.9"
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:15.5-alpine3.17
+    environment:
+      - POSTGRES_DB=planday
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test
+      - POSTGRES_PORT=5432
+    restart: unless-stopped
+    ports:
+      - 5432:5432

@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: trial_goals
+    description: "A trial goals model that tracks whether an organization has completed each of the trial goals"
+    materialized: table
+    columns:
+      - name: organization_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+          - relationships:
+                to: ref('interactions_pivot')
+                field: organization_id
+
+  - name: trial_activation
+    description: "A trial activation model that tracks which organizations have fully completed all trial goals"
+    materialized: table
+    columns:
+      - name: organization_id
+        description: "The primary key for this table"
+        constraints:
+          - type: primary_key
+        data_tests:
+          - unique
+          - not_null
+          - relationships:
+              to: ref('interactions_pivot')
+              field: organization_id

@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: interactions_pivot
+    description: "A interactions model that transforms the raw interactions data by pivoting them"
+    columns:
+      - name: organization_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+      - name: shift_created_count
+        data_tests:
+          - not_negative_count
+      - name: employee_invited_count
+        data_tests:
+          - not_negative_count
+      - name: punch_in_count
+        data_tests:
+          - not_negative_count
+      - name: punch_in_entry_approved_count
+        data_tests:
+          - not_negative_count
+      - name: viewed_count
+        data_tests:
+          - not_negative_count
+
+  - name: trial_period
+    description: "A trial period model that tracks the duration of each organization's trial period.
+    Based on the assumption that the source data only tracks interactions for trialists."
+    columns:
+      - name: organization_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null

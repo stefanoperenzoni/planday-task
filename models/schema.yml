@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: planday
+    database: planday
+    schema: planday
+    tables:
+      - name: interactions

@@ -1,0 +1,15 @@
+unit_tests:
+  - name: test_interactions_pivot
+    description: "Check goal and interactions are counted correctly"
+    model: interactions_pivot
+    overrides:
+      macros:
+        is_incremental: false
+    given:
+      - input: source('planday', 'interactions')
+        format: csv
+        fixture: test_interactions_data
+    expect:
+      format: csv
+      rows:
+        3f14a47847fb42bbc7dc119e7e1ef588,3,0,0,0,0,0,0,0,0,2024-01-03 22:08:05.000 Z
