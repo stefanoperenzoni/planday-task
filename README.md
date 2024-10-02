@@ -99,9 +99,8 @@ I will later explain how, through an additional model and logic, we could keep t
 Similarly, this is also materialized as incremental for the same reason explained earlier.
 
 
-
-NB: BOTH INCREMENTAL LAYEWRS COULD HAVE MADE EASIER AND MORE UNDERSTANDABLE BY USING A BETTER INCREMENTAL_STRATEGY. The reason why I did not is because I was not totally proficient with that yet so i preferred pushing a working solution I was confortable with.
-However, I took the opportunity to experiment with merging strategy in the branch [feature/incremental_strategy](https://github.com/stefanoperenzoni/planday-task/tree/feature/incremental_strategy) where I applied it for the trial_period model
+NB: BOTH INCREMENTAL LAYEWRS COULD HAVE MADE EASIER AND MORE UNDERSTANDABLE BY USING A BETTER INCREMENTAL_STRATEGY.
+However, I took the opportunity to experiment with merging strategy where I applied it for the trial_period model
 
 ### Marts Layers
 
