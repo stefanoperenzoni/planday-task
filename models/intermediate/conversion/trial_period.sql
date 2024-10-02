@@ -37,5 +37,5 @@ SELECT
     GREATEST(nd.max_timestamp, ed.max_timestamp) AS max_timestamp,
     (GREATEST(nd.max_timestamp, ed.max_timestamp) - LEAST(nd.min_timestamp, ed.min_timestamp)) AS trial_timedelta
 FROM existing_data ed
-JOIN new_data nd
+FULL OUTER JOIN new_data nd
 ON ed.organization_id = nd.organization_id
