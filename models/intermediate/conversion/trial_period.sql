@@ -4,7 +4,7 @@
         unique_key = 'organization_id',
         cluster_by = ["organization_id"],
         incremental_strategy = 'merge',
-        merge_update_columns = ['max_timestamp']
+        merge_update_columns = ['max_timestamp', 'trial_timedelta']
     )
 }}
 
