@@ -8,22 +8,29 @@
     )
 }}
 
-{% if is_incremental() %}
+
 WITH organzation_changed as (
-    SELECT DISTINCT "ORGANIZATION_ID" as organization_id
+{% if is_incremental() %}
+    SELECT
+        "ORGANIZATION_ID" as organization_id,
+        MIN("TIMESTAMP") as min_timestamp,
+        MAX("TIMESTAMP") as max_timestamp
     FROM {{ source('planday', 'interactions') }}
-    WHERE "TIMESTAMP" > (SELECT MAX("max_timestamp") from {{this}})
+    WHERE "TIMESTAMP" > (SELECT MAX(max_timestamp) from {{this}})
+    GROUP BY "ORGANIZATION_ID"
+{% else %}
+    SELECT
+        "ORGANIZATION_ID" as organization_id,
+        MIN("TIMESTAMP") as min_timestamp,
+        MAX("TIMESTAMP") as max_timestamp
+    FROM {{ source('planday', 'interactions') }}
+    GROUP BY "ORGANIZATION_ID"
+{% endif %}
 )
 
-{% endif %}
-
 SELECT
-"ORGANIZATION_ID" as organization_id,
-MIN("TIMESTAMP") as min_timestamp,
-MAX("TIMESTAMP") as max_timestamp,
-MAX("TIMESTAMP") - MIN("TIMESTAMP") as trial_timedelta
-FROM {{ source('planday', 'interactions') }}
-{% if is_incremental() %}
-  WHERE "ORGANIZATION_ID" in (select organization_id from organzation_changed)
-{% endif %}
-GROUP BY "ORGANIZATION_ID"
+organization_id,
+min_timestamp,
+max_timestamp,
+max_timestamp - min_timestamp as trial_timedelta
+FROM organzation_changed
