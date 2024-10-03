@@ -1,3 +1,3 @@
 {% macro coalesce_counts(ed, nd, column_name) %}
-    COALESCE({{ ed }}.{{ column_name }}, 0) + COALESCE({{ nd }}.{{ column_name }}, 0)
+    {{ ed }}.{{ column_name }} + {{ nd }}.{{ column_name }}
 {% endmacro %}

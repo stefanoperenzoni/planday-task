@@ -47,7 +47,7 @@ existing_data AS (
 
 -- Combine existing data with new data
 SELECT
-    COALESCE(new_data.organization_id, existing_data.organization_id) AS organization_id,
+    new_data.organization_id AS organization_id,
     {{ coalesce_counts("existing_data", "new_data", "shift_created_count") }} AS shift_created_count,
     {{ coalesce_counts('existing_data', 'new_data', 'employee_invited_count') }} AS employee_invited_count,
     {{ coalesce_counts('existing_data', 'new_data', 'punch_in_count') }} AS punch_in_count,
