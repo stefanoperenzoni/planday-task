@@ -59,5 +59,5 @@ SELECT
     COALESCE(existing_data.availability_viewed_count, 0) + COALESCE(new_data.availability_viewed_count, 0) AS availability_viewed_count,
     GREATEST(new_data.max_timestamp, existing_data.max_timestamp) AS max_timestamp
 FROM new_data
-FULL OUTER JOIN existing_data
+LEFT JOIN existing_data
     ON new_data.organization_id = existing_data.organization_id
