@@ -48,15 +48,15 @@ existing_data AS (
 -- Combine existing data with new data
 SELECT
     new_data.organization_id AS organization_id,
-    {{ coalesce_counts("existing_data", "new_data", "shift_created_count") }} AS shift_created_count,
-    {{ coalesce_counts('existing_data', 'new_data', 'employee_invited_count') }} AS employee_invited_count,
-    {{ coalesce_counts('existing_data', 'new_data', 'punch_in_count') }} AS punch_in_count,
-    {{ coalesce_counts('existing_data', 'new_data', 'punch_in_entry_approved_count') }} AS punch_in_entry_approved_count,
-    {{ coalesce_counts('existing_data', 'new_data', 'viewed_count') }} AS viewed_count,
-    {{ coalesce_counts('existing_data', 'new_data', 'revenue_viewed_count') }} AS revenue_viewed_count,
-    {{ coalesce_counts('existing_data', 'new_data', 'integrations_viewed_count') }} AS integrations_viewed_count,
-    {{ coalesce_counts('existing_data', 'new_data', 'absence_viewed_count') }} AS absence_viewed_count,
-    {{ coalesce_counts('existing_data', 'new_data', 'availability_viewed_count') }} AS availability_viewed_count,
+    {{ sum_counts("existing_data", "new_data", "shift_created_count") }} AS shift_created_count,
+    {{ sum_counts('existing_data', 'new_data', 'employee_invited_count') }} AS employee_invited_count,
+    {{ sum_counts('existing_data', 'new_data', 'punch_in_count') }} AS punch_in_count,
+    {{ sum_counts('existing_data', 'new_data', 'punch_in_entry_approved_count') }} AS punch_in_entry_approved_count,
+    {{ sum_counts('existing_data', 'new_data', 'viewed_count') }} AS viewed_count,
+    {{ sum_counts('existing_data', 'new_data', 'revenue_viewed_count') }} AS revenue_viewed_count,
+    {{ sum_counts('existing_data', 'new_data', 'integrations_viewed_count') }} AS integrations_viewed_count,
+    {{ sum_counts('existing_data', 'new_data', 'absence_viewed_count') }} AS absence_viewed_count,
+    {{ sum_counts('existing_data', 'new_data', 'availability_viewed_count') }} AS availability_viewed_count,
     GREATEST(new_data.max_timestamp, existing_data.max_timestamp) AS max_timestamp
 FROM new_data
 LEFT JOIN existing_data
